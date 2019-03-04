@@ -14,6 +14,7 @@ use PayPal\Api\Details;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
+use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
@@ -85,5 +86,19 @@ class PayPalService
         $redirectUrls->setReturnUrl("$baseUrl/payment/success")
             ->setCancelUrl("$baseUrl/payment/failure");
 
+        $payment = new Payment();
+        $payment->setIntent("sale")
+            ->setPayer($payer)
+            ->setRedirectUrls($redirectUrls)
+            ->setTransactions(array($transaction));
+
+        try {
+            $payment->create($this->apiContext);
+        } catch (\Exception $exception) {
+            var_dump($exception->getMessage());
+            exit(1);
+        }
+
+        return $payment->getApprovalLink();
     }
 }
