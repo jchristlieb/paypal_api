@@ -10,7 +10,10 @@ namespace App\Controller;
 
 
 use App\Entity\Order;
+use App\Service\PayPalService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends AbstractController
 {
@@ -28,4 +31,21 @@ class DefaultController extends AbstractController
     }
 
 
+    public function payment(PayPalService $payPalService)
+    {
+        $order = $_REQUEST;
+        $approvalLink = $payPalService->createPaymentFromOrder($order);
+
+        return new RedirectResponse($approvalLink);
+    }
+
+    public function success()
+    {
+        return new Response("success");
+    }
+
+    public function failure()
+    {
+        return new Response("failure");
+    }
 }
