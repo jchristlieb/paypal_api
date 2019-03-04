@@ -1,3 +1,13 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+paypal:
+    path: /payment
+    controller: App\Controller\DefaultController::payment
+    methods: [POST]
+success:
+    path: /payment/success
+    controller: App\Controller\DefaultController::success
+failure:
+    path: /payment/failure
+    controller: App\Controller\DefaultController::failure
