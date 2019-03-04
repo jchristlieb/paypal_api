@@ -23,7 +23,7 @@ use PayPal\Rest\ApiContext;
 class PayPalService
 {
     /**
-     * @var ApiContext
+     * @var ApiContextand so on
      */
     private $apiContext;
 
