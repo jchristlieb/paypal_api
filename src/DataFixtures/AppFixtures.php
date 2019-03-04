@@ -37,10 +37,13 @@ class AppFixtures extends Fixture
         $manager->persist($order1);
 
         $order2 = new Order();
+        $order2->addProduct($product1);
         $order2->addProduct($product2);
         $order2->addProduct($product3);
         $order2->setSubtotal(
-            $product2->getPrice() + $product3->getPrice());
+            $product1->getPrice() +
+            $product2->getPrice() +
+            $product3->getPrice());
         $manager->persist($order2);
 
         $order3 = new Order();

@@ -10,8 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Order;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DefaultController
+class DefaultController extends AbstractController
 {
     public function index()
     {
@@ -25,5 +26,6 @@ class DefaultController
             'products' => $products,
         ]);
     }
+
 
 }
